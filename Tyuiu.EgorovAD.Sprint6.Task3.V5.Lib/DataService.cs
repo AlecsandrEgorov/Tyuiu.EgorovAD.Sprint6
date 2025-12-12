@@ -9,28 +9,28 @@ namespace Tyuiu.EgorovAD.Sprint6.Task3.V5.Lib
             int rows = result.GetLength(0);
             int cols = result.GetLength(1);
 
-            // Сортировка пузырьком по 3-му столбцу
+            // Сортировка пузырьком по 3-му столбцу (индекс 2)
             for (int i = 0; i < rows - 1; i++)
             {
                 for (int j = 0; j < rows - i - 1; j++)
                 {
-                    // Сравниваем значения в 3-м столбце (индекс 2)
-                    if (result[j, 2] > result[j + 1, 2])
+                    if (result[j, 2] > result[j + 1, 2]) // ← сравниваем 3-й столбец
                     {
-                        // Меняем строки местами
-                        for (int k = 0; k < cols; k++)
+                        // Меняем строки местами ← ВЕСЬ цикл меняет всю строку!
+                        for (int col = 0; col < cols; col++)
                         {
-                            int temp = result[j, k];
-                            result[j, k] = result[j + 1, k];
-                            result[j + 1, k] = temp;
+                            int temp = result[j, col];
+                            result[j, col] = result[j + 1, col];
+                            result[j + 1, col] = temp;
                         }
                     }
                 }
             }
 
             return result;
-
         }
+
     }
+    
     
 }
