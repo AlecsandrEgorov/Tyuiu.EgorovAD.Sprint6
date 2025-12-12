@@ -7,25 +7,21 @@ namespace Tyuiu.EgorovAD.Sprint6.Task3.V5.Lib
         {
             int[,] result = (int[,])matrix.Clone();
             int rows = result.GetLength(0);
-            int cols = result.GetLength(1);
 
-            // Сортировка пузырьком по 3-му столбцу
-            for (int i = 0; i < rows - 1; i++)
+            // Собираем значения из 3-го столбца
+            int[] thirdColumn = new int[rows];
+            for (int i = 0; i < rows; i++)
             {
-                for (int j = 0; j < rows - i - 1; j++)
-                {
-                    // Сравниваем значения в 3-м столбце (индекс 2)
-                    if (result[j, 2] > result[j + 1, 2])
-                    {
-                        // Меняем строки местами
-                        for (int k = 0; k < cols; k++)
-                        {
-                            int temp = result[j, k];
-                            result[j, k] = result[j + 1, k];
-                            result[j + 1, k] = temp;
-                        }
-                    }
-                }
+                thirdColumn[i] = result[i, 2];
+            }
+
+            // Сортируем значения 3-го столбца
+            Array.Sort(thirdColumn);
+
+            // Записываем отсортированные значения обратно в 3-й столбец
+            for (int i = 0; i < rows; i++)
+            {
+                result[i, 2] = thirdColumn[i];
             }
 
             return result;
