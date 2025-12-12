@@ -13,7 +13,7 @@ namespace Tyuiu.EgorovAD.Sprint6.Task1.V23.Lib
             int count = 0;
             for (int i = startValue; i <= stopValue; i++)  
             {
-                double y = Math.Round(3.3 * Math.Sin(i) + 2.4 * i - 4.1 * i * Math.Cos(i), 2);
+                double y = Math.Round( Math.Sin(i) + (2 * i) / 3 - Math.Cos(i) * 4 * i, 2);
                 array[count] = y;
                 count++;
             }
