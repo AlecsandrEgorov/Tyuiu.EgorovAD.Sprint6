@@ -5,41 +5,42 @@ namespace Tyuiu.EgorovAD.Sprint6.Task3.V5.Lib
     {
         public int[,] Calculate(int[,] matrix)
         {
-            
-                int rows = matrix.GetLength(0) + 1;
-                int cols = matrix.Length / rows;
+            // Правильно получаем размеры матрицы
+            int rows = matrix.GetLength(0);    // количество строк = 5
+            int cols = matrix.GetLength(1);    // количество столбцов = 5
 
-                // Проверяем, что матрица достаточно большая для сортировки
-                if (rows < 2) return matrix;
+            // Создаем копию матрицы для сортировки
+            int[,] result = (int[,])matrix.Clone();
 
-                // Создаем копию матрицы, чтобы не изменять оригинал
-                int[,] result = (int[,])matrix.Clone();
+            // Индекс столбца для сортировки (3-й столбец = индекс 2)
+            int columnIndex = 2;
 
-                // Сортируем по третьему столбцу (индекс 2)
-                int columnIndex = 2;
+            // Проверяем, что столбец существует
+            if (columnIndex >= cols)
+            {
+                // Если 3-го столбца нет, возвращаем исходную матрицу
+                return result;
+            }
 
-                // Проверяем, что столбец существует
-                if (columnIndex >= cols) return result;
-
-                // Используем сортировку пузырьком для строк
-                for (int i = 0; i < rows - 1; i++)
+            // Сортировка пузырьком по 3-му столбцу
+            for (int i = 0; i < rows - 1; i++)
+            {
+                for (int j = 0; j < rows - i - 1; j++)
                 {
-                    for (int j = 0; j < rows - i - 1; j++)
+                    // Сравниваем значения в 3-м столбце
+                    if (result[j, columnIndex] > result[j + 1, columnIndex])
                     {
-                        // Сравниваем значения в указанном столбце
-                        if (result[j, columnIndex] > result[j + 1, columnIndex])
-                        {
-                            // Меняем строки местами
-                            SwapRows(result, j, j + 1);
-                        }
+                        // Меняем строки местами
+                        SwapRows(result, j, j + 1);
                     }
                 }
+            }
 
-                return result;
+            return result;
         }
 
-          // Метод для обмена двух строк матрицы
-         private void SwapRows(int[,] matrix, int row1, int row2)
+        // Метод для обмена строк
+        private void SwapRows(int[,] matrix, int row1, int row2)
         {
             int cols = matrix.GetLength(1);
 
