@@ -19,7 +19,7 @@ namespace Tyuiu.EgorovAD.Sprint6.Task4.V13.Lib
                 array[count] = y;
                 count++;
             }
-            return array; 
+            return array;
         }
     }
 }
